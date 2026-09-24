@@ -5,8 +5,11 @@ const blogRouter = require('./routes/blog');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { checkAuthenticationCookie } = require('./middlewares/authentication');
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express();
-const PORT = 8000;
+
+const PORT = process.env.PORT || 8000;
 const Blog = require('./models/blog');
 
 app.set('view engine', 'ejs');
