@@ -1,9 +1,46 @@
-# Y|OG - A Blog Application
+# Y|OG Blog Application
 
-https://github.com/yogeshkanwade21/Nodejs-Blog-App/assets/90169068/20a2bd6c-0108-41e4-84c5-01621a8a9787
+A server-rendered blog application built with Node.js, Express, MongoDB, and EJS. Users can create accounts, publish blog posts, view profiles, and delete their own posts.
 
-### Throughout this journey, I've learned so much about building dynamic web applications using Node.js, Express, MongoDB, and EJS templating. In addition to following Piyush Garg's tutorials, I took the opportunity to enhance the project by adding two exciting features:
+## Requirements
 
-1. <b> Profile Page for Users </b> <br> I implemented a user profile page where users can view their personal information, including their name, email, role, and the date they joined the platform. This feature adds a personalized touch to the application and enhances the user experience.
+- Node.js 20 or newer
+- npm
+- MongoDB running locally on `mongodb://127.0.0.1:27017`
 
-2. <b> Delete Blog Option from User Profile </b> <br> Building on the existing functionality, I introduced the ability for users to delete their own blog posts directly from their profile page (using a client-side API call). This feature empowers users to manage their content and gives them greater control over their contributions to the platform.
+## Getting started
+
+```bash
+git clone https://github.com/yogeshkanwade21/Nodejs-Blog-App.git
+cd Nodejs-Blog-App
+npm install
+npm run dev
+```
+
+The application runs at http://localhost:8000/home.
+
+To run without the file watcher:
+
+```bash
+npm start
+```
+
+## Available routes
+
+| Route | Purpose |
+| --- | --- |
+| `/home` | View recent blog posts |
+| `/user/signup` | Create an account |
+| `/user/signin` | Sign in |
+| `/user/profile/:userId` | View a user profile |
+| `/blog/add-blog` | Create a blog post |
+
+## Authentication
+
+Authentication uses signed HTTP cookies. JWT handling is provided by `jose`, which is compatible with current Node.js releases, including Node.js 26.
+
+## Notes
+
+- Start MongoDB before starting the application.
+- Uploaded images are stored under `public/uploads`.
+- The default development port is `8000`.

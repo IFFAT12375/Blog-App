@@ -1,11 +1,15 @@
 const { verifyToken } = require("../services/auth");
 
 function checkAuthenticationCookie(cookieName) {
-    return (req, res, next) => {
+    return async (req, res, next) => {
         const tokenCookieValue = req.cookies[cookieName];
         if (tokenCookieValue) {
-                const userPayload = verifyToken(tokenCookieValue);
-                req.user = userPayload; 
+            try {
+                const userPayload = await verifyToken(tokenCookieValue);
+                req.user = userPayload;
+            } catch (error) {
+                res.clearCookie(cookieName);
+            }
         }
 
         next();

@@ -1,22 +1,23 @@
-const jwt = require('jsonwebtoken');
+const { SignJWT, jwtVerify } = require('jose');
 
-const secretPhrase = 'secretphraseforsecrettokenforsecrettoken';
+const secretPhrase = new TextEncoder().encode('secretphraseforsecrettokenforsecrettoken');
 
-function createTokenForUser(user) {
+async function createTokenForUser(user) {
     const payload = {
         _id : user._id,
         fullName : user.fullName,
         email : user.email
     }
 
-    const token = jwt.sign(payload, secretPhrase);
-    return token;
+    return new SignJWT(payload)
+        .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+        .setIssuedAt()
+        .sign(secretPhrase);
 }
 
-function verifyToken(token) {
-
-    const decodedUser = jwt.verify(token, secretPhrase);
-    return decodedUser;
+async function verifyToken(token) {
+    const { payload } = await jwtVerify(token, secretPhrase);
+    return payload;
 }
 
 module.exports = {createTokenForUser, verifyToken};
