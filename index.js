@@ -22,7 +22,7 @@ app.use(express.static(path.resolve("./public")));
 app.use(checkAuthenticationCookie("token"));
 
 // connect to the database
-mongoose.connect('mongodb://127.0.0.1:27017/blog-app')
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('mongodb connection established');
     })
