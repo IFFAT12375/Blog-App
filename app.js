@@ -21,8 +21,12 @@ app.use(cookieParser());
 app.use(express.static(path.resolve("./public")));
 app.use(checkAuthenticationCookie("token"));
 
+app.get('/', (req, res) => {
+    return res.redirect('/home');
+});
+
 // connect to the database
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log('mongodb connection established');
     })
